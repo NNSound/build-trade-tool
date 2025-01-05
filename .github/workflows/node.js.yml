@@ -19,8 +19,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 20
-        check-latest: true
-        cache: 'npm'
+        check-latest: false
 
     - name: Clone external repository
       run: |  
