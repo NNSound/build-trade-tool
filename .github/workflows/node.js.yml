@@ -23,8 +23,8 @@ jobs:
     - name: Use Node.js 19
       uses: actions/setup-node@v3
       with:
-        node-version: 19
-        check-latest: true
+        node-version: 19.9.0
+        check-latest: false
         cache: 'npm'
 
     - name: Clone external repository
