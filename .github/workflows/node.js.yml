@@ -4,28 +4,45 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch: # 手動觸發
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [19.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Use Node.js 19
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 19
+        check-latest: true
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+
+    - name: Clone external repository
+      run: |  
+        git clone https://github.com/Seraveegd/poe2-trade-app.git
+        cd poe2-trade-app
+
+    - name: Install dependencies
+          run: |
+            cd poe2-trade-app
+            npm install
+
+    - name: Build project
+      run: |
+        cd poe2-trade-app
+        npm run electron
+
+    - name: package
+      run: |
+        cd poe2-trade-app
+        npm run package
