@@ -11,20 +11,15 @@ jobs:
 
     runs-on: windows-latest
 
-    strategy:
-      matrix:
-        node-version: [19.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Use Node.js 19
+    - name: Use Node.js 20
       uses: actions/setup-node@v3
       with:
-        node-version: 19.9.0
-        check-latest: false
+        node-version: 20
+        check-latest: true
         cache: 'npm'
 
     - name: Clone external repository
