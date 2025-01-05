@@ -33,9 +33,9 @@ jobs:
         cd poe2-trade-app
 
     - name: Install dependencies
-          run: |
-            cd poe2-trade-app
-            npm install
+      run: |
+        cd poe2-trade-app
+        npm install
 
     - name: Build project
       run: |
